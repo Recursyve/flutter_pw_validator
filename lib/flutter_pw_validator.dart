@@ -164,12 +164,12 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
                 children: conditionsHelper.getter()!.entries.map(
                   (entry) {
                     int? value;
-                    if (entry.key == Strings.AT_LEAST || entry.key == translatedStrings[0]) value = widget.minLength;
-                    if (entry.key == Strings.UPPERCASE_LETTER || entry.key == translatedStrings[1])
+                    if (entry.key == Strings.AT_LEAST || entry.key == translatedStrings![0]) value = widget.minLength;
+                    if (entry.key == Strings.UPPERCASE_LETTER || entry.key == translatedStrings![1])
                       value = widget.uppercaseCharCount;
-                    if (entry.key == Strings.NUMERIC_CHARACTER || entry.key == translatedStrings[2])
+                    if (entry.key == Strings.NUMERIC_CHARACTER || entry.key == translatedStrings![2])
                       value = widget.numericCharCount;
-                    if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == translatedStrings[3])
+                    if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == translatedStrings![3])
                       value = widget.specialCharCount;
                     return ValidationTextWidget(
                       color: isFirstRun
