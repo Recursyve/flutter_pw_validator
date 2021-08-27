@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_pw_validator/Resource/Strings.dart';
-import 'package:flutter_pw_validator/localizations/app.localizations.dart';
 
 /// This class helps to recognize user selected condition and check them
 class ConditionsHelper {
   Map<String, bool>? _selectedCondition;
-  final bool hasTranslation;
+  final List<String>? translatedStrings;
 
-  ConditionsHelper({this.hasTranslation = false});
+  ConditionsHelper({this.translatedStrings});
 
   String atLeast = Strings.AT_LEAST;
   String uppercaseLetter = Strings.UPPERCASE_LETTER;
@@ -16,11 +15,13 @@ class ConditionsHelper {
 
   /// Recognize user selected condition from widget constructor to put them on map with their value
   void setSelectedCondition(int minLength, uppercaseCharCount, numericCharCount, specialCharCount) {
-    if (this.hasTranslation) {
-      atLeast = TranslationKeyStrings.AT_LEAST;
-      uppercaseLetter = TranslationKeyStrings.UPPERCASE_LETTER;
-      numericCharacter = TranslationKeyStrings.NUMERIC_CHARACTER;
-      specialCharacter = TranslationKeyStrings.SPECIAL_CHARACTER;
+    if (translatedStrings != null) {
+      if (this.translatedStrings!.length > 0) {
+        atLeast = this.translatedStrings![0];
+        uppercaseLetter = this.translatedStrings![1];
+        numericCharacter = this.translatedStrings![2];
+        specialCharacter = this.translatedStrings![3];
+      }
     }
 
     _selectedCondition = {

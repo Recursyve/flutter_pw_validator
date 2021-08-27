@@ -9,7 +9,6 @@ import 'Components/ValidationTextWidget.dart';
 import 'Resource/MyColors.dart';
 import 'Resource/Strings.dart';
 import 'Utilities/SizeConfig.dart';
-import 'localizations/app.localizations.dart';
 
 class FlutterPwValidator extends StatefulWidget {
   final int minLength, uppercaseCharCount, numericCharCount, specialCharCount;
@@ -19,7 +18,7 @@ class FlutterPwValidator extends StatefulWidget {
   final TextEditingController controller;
   final Widget? bulletPoint;
   final bool showValidationBar;
-  final bool hasTranslation;
+  final List<String>? translatedStrings;
 
   FlutterPwValidator({
     required this.width,
@@ -35,7 +34,7 @@ class FlutterPwValidator extends StatefulWidget {
     this.successColor = MyColors.green,
     this.failureColor = MyColors.red,
     this.showValidationBar = true,
-    this.hasTranslation = false,
+    this.translatedStrings, // Translated strings (atleast, uppercase, numeric & special) in that order
   }) {
     //Initial entered size for global use
     SizeConfig.width = width;
@@ -50,13 +49,14 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
   /// Estimate that this the first run or not
   late bool isFirstRun;
   late bool hasTranslation;
+  late List<String> translatedStrings;
   late ConditionsHelper conditionsHelper;
 
   @override
   void initState() {
     super.initState();
-    hasTranslation = widget.hasTranslation;
-    conditionsHelper = ConditionsHelper(hasTranslation: hasTranslation);
+    if (widget.translatedStrings != null) translatedStrings = widget.translatedStrings!;
+    conditionsHelper = ConditionsHelper();
 
     isFirstRun = true;
 
@@ -86,7 +86,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.minLength,
       validator.hasMinLength,
       widget.controller,
-      hasTranslation ? TranslationKeyStrings.AT_LEAST : Strings.AT_LEAST,
+      translatedStrings[0].isNotEmpty ? translatedStrings[0] : Strings.AT_LEAST,
       hasMinLength,
     );
 
@@ -94,7 +94,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.uppercaseCharCount,
       validator.hasMinUppercase,
       widget.controller,
-      hasTranslation ? TranslationKeyStrings.UPPERCASE_LETTER : Strings.UPPERCASE_LETTER,
+      translatedStrings[1].isNotEmpty ? translatedStrings[1] : Strings.UPPERCASE_LETTER,
       hasMinUppercaseChar,
     );
 
@@ -102,7 +102,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.numericCharCount,
       validator.hasMinNumericChar,
       widget.controller,
-      hasTranslation ? TranslationKeyStrings.NUMERIC_CHARACTER : Strings.NUMERIC_CHARACTER,
+      translatedStrings[2].isNotEmpty ? translatedStrings[2] : Strings.NUMERIC_CHARACTER,
       hasMinNumericChar,
     );
 
@@ -110,7 +110,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.specialCharCount,
       validator.hasMinSpecialChar,
       widget.controller,
-      hasTranslation ? TranslationKeyStrings.SPECIAL_CHARACTER : Strings.SPECIAL_CHARACTER,
+      translatedStrings[3].isNotEmpty ? translatedStrings[3] : Strings.SPECIAL_CHARACTER,
       hasMinSpecialChar,
     );
 
@@ -160,13 +160,12 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
                 //Iterate through the condition map entries and generate  ValidationTextWidget for each item in Green or Red Color
                 children: conditionsHelper.getter()!.entries.map((entry) {
                   int? value;
-                  if (entry.key == Strings.AT_LEAST || entry.key == TranslationKeyStrings.AT_LEAST)
-                    value = widget.minLength;
-                  if (entry.key == Strings.UPPERCASE_LETTER || entry.key == TranslationKeyStrings.UPPERCASE_LETTER)
+                  if (entry.key == Strings.AT_LEAST || entry.key == translatedStrings[0]) value = widget.minLength;
+                  if (entry.key == Strings.UPPERCASE_LETTER || entry.key == translatedStrings[1])
                     value = widget.uppercaseCharCount;
-                  if (entry.key == Strings.NUMERIC_CHARACTER || entry.key == TranslationKeyStrings.NUMERIC_CHARACTER)
+                  if (entry.key == Strings.NUMERIC_CHARACTER || entry.key == translatedStrings[2])
                     value = widget.numericCharCount;
-                  if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == TranslationKeyStrings.SPECIAL_CHARACTER)
+                  if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == translatedStrings[3])
                     value = widget.specialCharCount;
                   return ValidationTextWidget(
                     color: isFirstRun
@@ -174,7 +173,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
                         : entry.value
                             ? widget.successColor
                             : widget.failureColor,
-                    text: widget.hasTranslation ? AppLocalizations.of(context)!.translate(entry.key) : entry.key,
+                    text: entry.key,
                     value: value,
                     bulletPoint: widget.bulletPoint,
                   );
