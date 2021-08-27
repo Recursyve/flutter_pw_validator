@@ -17,6 +17,8 @@ class FlutterPwValidator extends StatefulWidget {
   final Function onSuccess;
   final TextEditingController controller;
   final Widget? bulletPoint;
+  final Widget? checkedIcon;
+  final Widget? uncheckIcon;
   final bool showValidationBar;
   final List<String>? translatedStrings;
 
@@ -26,7 +28,9 @@ class FlutterPwValidator extends StatefulWidget {
     required this.minLength,
     required this.onSuccess,
     required this.controller,
-    required this.bulletPoint,
+    this.bulletPoint,
+    this.checkedIcon,
+    this.uncheckIcon,
     this.uppercaseCharCount = 0,
     this.numericCharCount = 0,
     this.specialCharCount = 0,
@@ -156,7 +160,6 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
             flex: 7,
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
                 //Iterate through the condition map entries and generate  ValidationTextWidget for each item in Green or Red Color
                 children: conditionsHelper.getter()!.entries.map((entry) {
                   int? value;
@@ -173,8 +176,11 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
                         : entry.value
                             ? widget.successColor
                             : widget.failureColor,
+                    isCheck: entry.value,
                     text: entry.key,
                     value: value,
+                    checkedIcon: widget.checkedIcon,
+                    uncheckIcon: widget.uncheckIcon,
                     bulletPoint: widget.bulletPoint,
                   );
                 }).toList()),

@@ -7,22 +7,29 @@ class ValidationTextWidget extends StatelessWidget {
   final Color color;
   final String text;
   final int? value;
+  final bool? isCheck;
+  final Widget? checkedIcon; // isCheck must not be null
+  final Widget? uncheckIcon; // isCheck must not be null
   Widget? bulletPoint;
 
-  ValidationTextWidget({required this.color, required this.text, required this.value, required this.bulletPoint});
+  ValidationTextWidget({
+    required this.color,
+    required this.text,
+    required this.value,
+    required this.bulletPoint,
+    this.isCheck,
+    this.uncheckIcon,
+    this.checkedIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Container(
-          width: SizeConfig.width! * 0.03,
-          height: SizeConfig.width! * 0.03,
-          child: (this.bulletPoint != null && this.bulletPoint is Image || this.bulletPoint is SvgPicture)
-              ? this.bulletPoint
-              : CircleAvatar(
-                  backgroundColor: color,
-                ),
+            width: SizeConfig.width! * 0.03,
+            height: SizeConfig.width! * 0.03,
+            child: _buildBulletPoint(bulletPoint, isCheck, uncheckIcon, checkedIcon)
         ),
         Padding(
           padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
@@ -32,6 +39,17 @@ class ValidationTextWidget extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+
+  Widget _buildBulletPoint(Widget? bulletPoint, bool? isCheck, Widget? uncheckIcon, Widget? checkedIcon) {
+    if (checkedIcon != null && uncheckIcon != null && isCheck != null) {
+      return isCheck ? checkedIcon : uncheckIcon;
+    }
+    else if (bulletPoint != null && bulletPoint is Image || bulletPoint is SvgPicture)
+      return bulletPoint!;
+    return CircleAvatar(
+      backgroundColor: color,
     );
   }
 }
