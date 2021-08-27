@@ -53,7 +53,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
   /// Estimate that this the first run or not
   late bool isFirstRun;
   late bool hasTranslation;
-  late List<String> translatedStrings;
+  late List<String>? translatedStrings;
   late ConditionsHelper conditionsHelper;
 
   @override
@@ -161,29 +161,31 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //Iterate through the condition map entries and generate  ValidationTextWidget for each item in Green or Red Color
-                children: conditionsHelper.getter()!.entries.map((entry) {
-                  int? value;
-                  if (entry.key == Strings.AT_LEAST || entry.key == translatedStrings[0]) value = widget.minLength;
-                  if (entry.key == Strings.UPPERCASE_LETTER || entry.key == translatedStrings[1])
-                    value = widget.uppercaseCharCount;
-                  if (entry.key == Strings.NUMERIC_CHARACTER || entry.key == translatedStrings[2])
-                    value = widget.numericCharCount;
-                  if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == translatedStrings[3])
-                    value = widget.specialCharCount;
-                  return ValidationTextWidget(
-                    color: isFirstRun
-                        ? widget.defaultColor
-                        : entry.value
-                            ? widget.successColor
-                            : widget.failureColor,
-                    isCheck: entry.value,
-                    text: entry.key,
-                    value: value,
-                    checkedIcon: widget.checkedIcon,
-                    uncheckIcon: widget.uncheckIcon,
-                    bulletPoint: widget.bulletPoint,
-                  );
-                }).toList()),
+                children: conditionsHelper.getter()!.entries.map(
+                  (entry) {
+                    int? value;
+                    if (entry.key == Strings.AT_LEAST || entry.key == translatedStrings[0]) value = widget.minLength;
+                    if (entry.key == Strings.UPPERCASE_LETTER || entry.key == translatedStrings[1])
+                      value = widget.uppercaseCharCount;
+                    if (entry.key == Strings.NUMERIC_CHARACTER || entry.key == translatedStrings[2])
+                      value = widget.numericCharCount;
+                    if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == translatedStrings[3])
+                      value = widget.specialCharCount;
+                    return ValidationTextWidget(
+                      color: isFirstRun
+                          ? widget.defaultColor
+                          : entry.value
+                              ? widget.successColor
+                              : widget.failureColor,
+                      isCheck: entry.value,
+                      text: entry.key,
+                      value: value,
+                      checkedIcon: widget.checkedIcon,
+                      uncheckIcon: widget.uncheckIcon,
+                      bulletPoint: widget.bulletPoint,
+                    );
+                  },
+                ).toList()),
           )
         ],
       ),
