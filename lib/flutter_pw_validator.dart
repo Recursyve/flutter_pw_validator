@@ -53,7 +53,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
   /// Estimate that this the first run or not
   late bool isFirstRun;
   late bool hasTranslation;
-  late List<String>? translatedStrings;
+  List<String>? translatedStrings;
   late ConditionsHelper conditionsHelper;
 
   @override
