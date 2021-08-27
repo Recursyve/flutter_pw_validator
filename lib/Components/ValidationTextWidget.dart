@@ -13,7 +13,7 @@ class ValidationTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Row(
+    return Row(
       children: [
         Container(
           width: SizeConfig.width! * 0.03,
@@ -26,9 +26,9 @@ class ValidationTextWidget extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
-          child: new Text(
+          child: Text(
             text.replaceFirst("-", value.toString()),
-            style: new TextStyle(fontSize: SizeConfig.width! * 0.04, color: color),
+            style: TextStyle(fontSize: SizeConfig.width! * 0.04, color: color),
           ),
         )
       ],
