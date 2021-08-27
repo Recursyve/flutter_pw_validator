@@ -90,7 +90,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.minLength,
       validator.hasMinLength,
       widget.controller,
-      translatedStrings[0].isNotEmpty ? translatedStrings[0] : Strings.AT_LEAST,
+      translatedStrings != null ? translatedStrings![0] : Strings.AT_LEAST,
       hasMinLength,
     );
 
@@ -98,7 +98,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.uppercaseCharCount,
       validator.hasMinUppercase,
       widget.controller,
-      translatedStrings[1].isNotEmpty ? translatedStrings[1] : Strings.UPPERCASE_LETTER,
+      translatedStrings != null ? translatedStrings![1] : Strings.UPPERCASE_LETTER,
       hasMinUppercaseChar,
     );
 
@@ -106,7 +106,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.numericCharCount,
       validator.hasMinNumericChar,
       widget.controller,
-      translatedStrings[2].isNotEmpty ? translatedStrings[2] : Strings.NUMERIC_CHARACTER,
+      translatedStrings != null ? translatedStrings![2] : Strings.NUMERIC_CHARACTER,
       hasMinNumericChar,
     );
 
@@ -114,7 +114,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       widget.specialCharCount,
       validator.hasMinSpecialChar,
       widget.controller,
-      translatedStrings[3].isNotEmpty ? translatedStrings[3] : Strings.SPECIAL_CHARACTER,
+      translatedStrings != null ? translatedStrings![3] : Strings.SPECIAL_CHARACTER,
       hasMinSpecialChar,
     );
 
