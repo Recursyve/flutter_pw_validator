@@ -25,17 +25,21 @@ class ValidationTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-            width: SizeConfig.width! * 0.03,
-            height: SizeConfig.width! * 0.03,
-            child: _buildBulletPoint(bulletPoint, isCheck, uncheckIcon, checkedIcon)
+          width: SizeConfig.width! * 0.03,
+          height: SizeConfig.width! * 0.03,
+          child: _buildBulletPoint(bulletPoint, isCheck, uncheckIcon, checkedIcon),
         ),
         Padding(
           padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
           child: Text(
             text.replaceFirst("-", value.toString()),
-            style: TextStyle(fontSize: SizeConfig.width! * 0.04, color: color),
+            style: TextStyle(
+              fontSize: SizeConfig.width! * 0.04,
+              color: color,
+            ),
           ),
         )
       ],
@@ -45,9 +49,7 @@ class ValidationTextWidget extends StatelessWidget {
   Widget _buildBulletPoint(Widget? bulletPoint, bool? isCheck, Widget? uncheckIcon, Widget? checkedIcon) {
     if (checkedIcon != null && uncheckIcon != null && isCheck != null) {
       return isCheck ? checkedIcon : uncheckIcon;
-    }
-    else if (bulletPoint != null && bulletPoint is Image || bulletPoint is SvgPicture)
-      return bulletPoint!;
+    } else if (bulletPoint != null && bulletPoint is Image || bulletPoint is SvgPicture) return bulletPoint!;
     return CircleAvatar(
       backgroundColor: color,
     );
