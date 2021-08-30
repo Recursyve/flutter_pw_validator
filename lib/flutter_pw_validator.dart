@@ -60,7 +60,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
   void initState() {
     super.initState();
     if (widget.translatedStrings != null) translatedStrings = widget.translatedStrings!;
-    conditionsHelper = ConditionsHelper();
+    conditionsHelper = ConditionsHelper(translatedStrings: translatedStrings);
 
     isFirstRun = true;
 
