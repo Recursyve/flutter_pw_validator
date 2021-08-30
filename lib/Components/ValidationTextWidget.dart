@@ -25,8 +25,7 @@ class ValidationTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Wrap(
         children: [
           Container(
             width: SizeConfig.width! * 0.03,
