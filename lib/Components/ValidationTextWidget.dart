@@ -34,11 +34,13 @@ class ValidationTextWidget extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
-          child: Text(
-            text.replaceFirst("-", value.toString()),
-            style: TextStyle(
-              fontSize: SizeConfig.width! * 0.04,
-              color: color,
+          child: Flexible(
+            child: Text(
+              text.replaceFirst("-", value.toString()),
+              style: TextStyle(
+                fontSize: SizeConfig.width! * 0.04,
+                color: color,
+              ),
             ),
           ),
         )
