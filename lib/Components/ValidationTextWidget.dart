@@ -25,8 +25,8 @@ class ValidationTextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Container(
             width: SizeConfig.width! * 0.03,
@@ -35,11 +35,13 @@ class ValidationTextWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
-            child: Text(
-              text.replaceFirst("-", value.toString()),
-              style: TextStyle(
-                fontSize: SizeConfig.width! * 0.04,
-                color: color,
+            child: Flexible(
+              child: Text(
+                text.replaceFirst("-", value.toString()),
+                style: TextStyle(
+                  fontSize: SizeConfig.width! * 0.04,
+                  color: color,
+                ),
               ),
             ),
           )
