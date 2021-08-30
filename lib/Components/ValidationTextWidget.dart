@@ -24,29 +24,26 @@ class ValidationTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          Container(
-            width: SizeConfig.width! * 0.03,
-            height: SizeConfig.width! * 0.03,
-            child: _buildBulletPoint(bulletPoint, isCheck, uncheckIcon, checkedIcon),
-          ),
-          Padding(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          width: SizeConfig.width! * 0.03,
+          height: SizeConfig.width! * 0.03,
+          child: _buildBulletPoint(bulletPoint, isCheck, uncheckIcon, checkedIcon),
+        ),
+        Expanded(
+          child: Padding(
             padding: EdgeInsets.only(left: SizeConfig.width! * 0.03),
-            child: Flexible(
-              child: Text(
-                text.replaceFirst("-", value.toString()),
-                style: TextStyle(
-                  fontSize: SizeConfig.width! * 0.04,
-                  color: color,
-                ),
+            child: Text(
+              text.replaceFirst("-", value.toString()),
+              style: TextStyle(
+                fontSize: SizeConfig.width! * 0.04,
+                color: color,
               ),
             ),
-          )
-        ],
-      ),
+          ),),
+      ],
     );
   }
 
