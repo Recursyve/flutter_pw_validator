@@ -171,19 +171,21 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
                       value = widget.numericCharCount;
                     if (entry.key == Strings.SPECIAL_CHARACTER || entry.key == translatedStrings?[3])
                       value = widget.specialCharCount;
-                    return ValidationTextWidget(
-                      color: isFirstRun
-                          ? widget.defaultColor
-                          : entry.value
-                              ? widget.successColor
-                              : widget.failureColor,
-                      isCheck: entry.value,
-                      text: entry.key,
-                      value: value,
-                      checkedIcon: widget.checkedIcon,
-                      uncheckIcon: widget.uncheckIcon,
-                      bulletPoint: widget.bulletPoint,
-                    );
+                    return (value! > 0)
+                        ? ValidationTextWidget(
+                            color: isFirstRun
+                                ? widget.defaultColor
+                                : entry.value
+                                    ? widget.successColor
+                                    : widget.failureColor,
+                            isCheck: entry.value,
+                            text: entry.key,
+                            value: value,
+                            checkedIcon: widget.checkedIcon,
+                            uncheckIcon: widget.uncheckIcon,
+                            bulletPoint: widget.bulletPoint,
+                          )
+                        : Container();
                   },
                 ).toList()),
           )
