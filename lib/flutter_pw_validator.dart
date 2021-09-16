@@ -15,6 +15,7 @@ class FlutterPwValidator extends StatefulWidget {
   final Color defaultColor, successColor, failureColor;
   final double width, height;
   final Function onSuccess;
+  final Function onError;
   final TextEditingController controller;
   final Widget? bulletPoint;
   final Widget? checkedIcon;
@@ -27,6 +28,7 @@ class FlutterPwValidator extends StatefulWidget {
     required this.height,
     required this.minLength,
     required this.onSuccess,
+    required this.onError,
     required this.controller,
     this.bulletPoint,
     this.checkedIcon,
@@ -125,6 +127,7 @@ class _FlutterPwValidatorState extends State<FlutterPwValidator> {
       if (value == true) trueCondition += 1;
     }
     if (conditionsCount == trueCondition) widget.onSuccess();
+    if (conditionsCount != trueCondition) widget.onError();
 
     //Rebuild the UI
     setState(() => null);
